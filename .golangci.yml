@@ -1,0 +1,238 @@
+# supported golangci-lint version = 1.64.8
+run:
+  # Number of operating system threads (`GOMAXPROCS`) that can execute golangci-lint simultaneously.
+  # If it is explicitly set to 0 (i.e. not the default) then golangci-lint will automatically set the value to match Linux container CPU quota.
+  # Default: the number of logical CPUs in the machine
+  concurrency: 0
+  timeout: 3m
+
+linters:
+  disable-all: true
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - canonicalheader
+    - containedctx
+    - contextcheck
+    - copyloopvar
+    - cyclop
+    - decorder
+    - dogsled
+    - dupword
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
+    - exptostd
+    - fatcontext
+    - forbidigo
+    - forcetypeassert
+    - gci
+    - ginkgolinter
+    - gocheckcompilerdirectives
+    - gochecknoinits
+    - gochecksumtype
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - godox
+    - gofmt
+    - gofumpt
+    - goheader
+    - goimports
+    - gomoddirectives
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - gosmopolitan
+    - govet
+    - grouper
+    - iface
+    - importas
+    - inamedparam
+    - ineffassign
+    - interfacebloat
+    - ireturn
+    - loggercheck
+    - maintidx
+    - makezero
+    - mirror
+    - misspell
+    - musttag
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnesserr
+    - nilnil
+    - nlreturn
+    - noctx
+    - nolintlint
+    - nosprintfhostport
+    - paralleltest
+    - prealloc
+    - predeclared
+    - promlinter
+    - protogetter
+    - reassign
+    - recvcheck
+    - revive
+    - rowserrcheck
+    - sloglint
+    - spancheck
+    - sqlclosecheck
+    - staticcheck
+    - stylecheck
+    - tagalign
+    - tagliatelle
+    - testableexamples
+    - testifylint
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    - usetesting
+    - wastedassign
+    - whitespace
+    - wsl
+    - zerologlint
+
+output:
+  # Default: false
+  sort-results: true
+  # Default: ["file"]
+  sort-order:
+    - linter
+    - file
+
+linters-settings:
+  ireturn:
+    allow:
+      - anon
+      - error
+      - empty
+      - stdlib
+      - Opt
+      - TextMapPropagator
+      - Span
+
+  nolintlint:
+    allow-unused: false
+    # Enable to require an explanation of nonzero length after each nolint directive.
+    # Default: false
+    require-explanation: true
+    # Enable to require nolint directives to mention the specific linter being suppressed.
+    # Default: false
+    require-specific: true
+
+  tagliatelle:
+    # Checks the struct tag name case.
+    case:
+      rules:
+        json: snake
+        yaml: snake
+        xml: snake
+        toml: snake
+        bson: snake
+        avro: snake
+        mapstructure: snake
+        env: snake
+        #        env: upperSnake
+        envconfig: upperSnake
+        whatever: snake
+
+
+  revive:
+    enable-all-rules: true
+    rules:
+      - name: unexported-return
+        disabled: true
+      - name: line-length-limit
+        disabled: true
+      - name: add-constant
+        disabled: true
+      - name: unhandled-error
+        disabled: true
+      - name: comment-spacings
+        disabled: true
+      - name: var-naming
+        disabled: true
+      - name: nested-structs
+        disabled: true
+      - name: max-public-structs
+        disabled: true
+      - name: function-length
+        disabled: true
+      - name: import-shadowing
+        disabled: true
+      - name: import-alias-naming
+        disabled: true
+      - name: empty-block
+        disabled: true
+      - name: confusing-naming
+        disabled: true
+      - name: exported
+        disabled: true
+      - name: unused-receiver
+        disabled: true
+      - name: indent-error-flow
+        disabled: true
+      - name:  early-return
+        disabled: true
+      - name:  use-any
+        disabled: true
+      - name: argument-limit
+        disabled: true
+      - name: cognitive-complexity
+        disabled: true
+      - name: cyclomatic
+        arguments:
+          - 15
+      - name: confusing-naming
+        disabled: true
+      - name: deep-exit
+        disabled: true
+      - name: get-return
+        disabled: true
+
+  gosimple:
+    checks:
+      - "all"
+      - "-S1008"
+
+  stylecheck:
+    checks:
+      - "all"
+      - "-ST1003" # Poorly chosen identifier. Like camel_case
+
+  nestif:
+    min-complexity: 7
+
+  cyclop:
+    # Default: 10
+    max-complexity: 15
+
+  gocritic:
+    enable-all: true
+    disabled-checks:
+      - hugeParam
+      - rangeValCopy
+      - importShadow
+
+  wsl:
+    allow-trailing-comment: true
+
+  reassign:
+    patterns:
+      - ".*"
+
+issues:
+  max-same-issues: 0
